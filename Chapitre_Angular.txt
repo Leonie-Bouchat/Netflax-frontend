@@ -1,0 +1,938 @@
+*_____________________________ Angular________Chapitre_1________________________________________________.<    Ouvrir avec VSCODE.
+!Introduction :
+    ! Etape 1 .______. Création du projet :
+
+        - Créer un fichier de projet.
+        - Maintenir ALT+SHIFT a l'endroit du dossier de projet ;
+            -> Ouvrir avec PowerShell.
+        -> npm install
+            -> Installer NODEJS: NodeJS EN DESSOUS de la version 15.
+            -> Installer Angular :
+                -> npm install -g @angular/cli
+            -> Verifié la version : 
+                -> ng version
+
+    ! Etape 2 .______. Ouverture du projet :
+
+        - Toujours dans le powershell du dossier ;
+            -> ng new "nom_de_mon_projet".
+
+    ? Options possible : https://angular.io/cli/new
+    ?     --skip-tests
+    ?     --routing
+    ?     --strict (true,false)
+    ?     --skip-git
+
+        Une fois la commande lancée , 3 questions vont être posée :
+        1. Ajoutez angular routing ? Dite "yes" (y)
+        2. Mode de template ? => Choisir SCSS (Pour plus de compatibilité.)
+        3. L'usage anonyme pour google => non (Protégé un maximum les clients si pour clients.)
+
+    ! Etape 3 .______. Démarrage du server :
+
+    *   - DANS VSCODE :	
+        - Démarrer le server avec la commande :
+            -> ng serve 
+            ? Par défault il sera sur le port 4200
+            ? Pour choisir sois même le port ;
+            -> ng serve --port=3000
+        ? L'option --open ouvrira l'app dans le navigateur.
+
+    ! Etape 4 .______. Créér ses pages, module et composant :
+
+        - Créér son index en module routing ;
+            -> ng g m exemple --routing
+            ? Ou ng generate module exemple --routing < version longue
+            ! Evitez les MAJ
+        - Ajoutez le component ;
+            -> ng g c exemple/index
+            ? Ou ng generate component exemple/index
+        
+        - Ajoutez une page 2 (exemple/index/coucou) ;
+            -> ng g c exemple/index/coucou
+        
+    ! Etape 5 ._______. Spécifié les routes d'accés a nos composants  :
+
+        - Ouvrir app-routing.module.ts <
+            * Et ajoutez les routes :
+            const routes: Routes = [
+            {path:"index", component:IndexComponent, children:[
+                {path:"coucou", component:CoucouComponent}
+            ]},
+            ];
+            * Pareillement dans exemple -> exemple-routing.module.ts
+
+        - Ouvrir app.module.ts
+            * Et rajoutez votre module :
+            @NgModule({
+                declarations: [
+                    AppComponent,
+                    IndexComponent 
+                ],
+            * Ici juste IndexComponent <
+        
+        - Ouvrir exemple.module.ts (Celui qui est avec le routing.)
+            * Et verifier :
+            @NgModule({
+                declarations: [
+                    IndexComponent
+                ],
+                imports: [
+                    CommonModule,
+                    ExempleRoutingModule
+                ],
+                ? Rajoutez l'exports :
+                exports:[ 
+                    IndexComponent
+                ]
+                })
+
+        - Au niveaux des HTML : 
+            -> Utilisez, sur chaque component html :
+            ?   <router-outlet></router-outlet>
+
+    ! Etape 6 .______. Html :
+
+        - Ouvrir app.component.html <
+        ? Supprimez et ajoutez vos element :
+        ! Toujours mettre <router-outlet></router-outlet> et au lieux de <a href="/x"> mettre <a routerLink="/x"></a>
+        * Exemple :
+
+            <h1>Bienvenue dans mon premier Exo Angular !! 😁</h1>
+        <nav>
+            <ul>
+                <li>
+                    <a routerLink="/index">
+                        <div>index</div>
+                    </a>
+                </li>
+                <li>
+                    <a routerLink="/index/coucou">
+                        <div>coucou</div>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <router-outlet></router-outlet>
+
+*___________Exemple__________________REFORMULEZ_EN_ETAPE___________Chapitre_2___________________________________________________.<
+!Projet:
+    Exemple de A -> Z ;
+
+    !Pour copier un projet existant, ouvrir le Git bash -> git clone http://liendugit.blabla
+    !Puis -> npm install
+    ! -> npm audit fix
+
+    ? Consignes : Réalisez un projet avec Home/exercice et home/demo ainsi que le /home.
+
+    * Création du projet (Back-end):
+
+        !-> PowerShell :    ng new Correctif --routing --skip-tests --skip-git --style scss < Evite les questions et le lien git (U,M)
+        (pour lancer direct vs avec le shell : 
+            "cd .\Correctif"      ensuite ->      "code ." )    < Permet de travaillez sur le projet dans le PowerShell
+        ! Toujours dans le PowerShell : (Ou ouvrir avant le server avant pour réalisez la commande sur vs : ng serve --port=3000)
+            -> ng generate module Demo --routing
+    
+    *Ouvrir app-module.ts :
+
+        -> Ajoutez DemoModule dans les imports.
+
+    * Ajoutez un composant a un module précis :
+
+        -> ng generate component Demo/Components/Home -m Demo
+        -> Modifié le Home.component.html.
+
+    * Modifier le Module pour faire du composant "Home" le composant d'amorticage. ("Page d'acceuil.")
+
+        -> demo.module.ts :
+            ! En dessous des imports ajoutez bootstrap :
+            -> bootstrap:[ HomeComponent ]
+        
+        -> demo-routing.module.ts
+            -> Ajoutez dans la const route :
+            {path:"", component:HomeComponent}                  < Rien car par default il se dirige vers HomeComponent
+
+    ! Ajoutez Exercice :
+
+        -> Retournez dans le PowerShell ;
+            -> ng generate module Exercice --routing
+            -> ng generate component Exercice/Components/Home -m Exercice
+        
+        * Ouvrir app.module ;
+            -> importé ExerciceModule 
+
+        * Ouvrir exercice.module.ts :
+            -> Ajoutez bootstrap : [HomeComponent]          < Attention supprimé l'import partant de "demo/"
+
+        * Ouvrir exercice-routing.module.ts :
+            -> Ajoutez dans la const route :
+            {path:"", component:HomeComponent}          < Celui de "Exercice" et non celui de "Demo".
+
+    ! Modifié le routage pour lier le tout :
+
+        * app-routing.module.ts :
+            -> Ajoutez les routes : 
+            {path:"demo", loadChildren :
+                ()=>import('./demo/demo.module').then(m => m.DemoModule)
+            },
+            {path:"exercice", loadChildren :
+                ()=>import('./exercice/exercice.module').then(m => m.ExerciceModule)
+            },
+
+    * Ajoutez un components navigation dans le module principal "App" :
+        -> ng g c Components/Navigation
+
+    ! Modifié le HTML et passez a l'affichage (front) :
+        
+        *-> navigation.component.html :
+            -> nav>ul>li*2>a>div{Lien $}                < Hemet pour ajoutez toutes les balises.
+            !<a href=""> modifié en routerlink correspondant au path de votre app-routing.module.ts :
+                -> <a routerLink="demo">
+                        <div>Lien 1</div>
+                    </a>
+
+                    <a routerLink="exercice">
+                        <div>Lien 2</div>
+                    </a>
+    
+        * Modifier le HTML poour affiché les elements routé dans app.component :
+            -> Ouvrir app.component.html :
+                -> Tout supprimez ;
+                ?-> Ajoutez  <router-outlet></router-outlet>
+                ?-> Ajoutez  <app-navigation></app-navigation>
+        
+        * Modifier le scss pour ajusté l'affichage :
+            -> Ouvrir app.component.scss
+            ->  app-navigation{
+                    float: right;       < Ou utilisez Flex 
+                    width: 250px;
+                }
+
+
+*_____________________________ Angular________Chapitre_3________________________________________________________________________.<
+!Binding :
+
+        *Dans Home.component.ts :
+
+            public title:string;
+
+            constructor() {
+                this.title = "Bienvenue dans la demo !"
+            }
+
+            ngOnInit(): void {
+                setTimeout(()=>this.title= "Que fait-tu encore la ?", 3000);
+            }
+
+        *Dans Home.component.html :
+
+            <p>{{title}}</p>
+            <router-outlet></router-outlet>
+
+    ! Créez binding-two-way ; 
+        -> ng g c /components/binding-two-way
+
+        *Dans binding.html :
+            <h2>Bienvenu{{(nom.length>0)?' '+nom:''}}!</h2>
+            <label>Quel est votre nom :</label> <input type="text" [(ngModel)]="nom">
+    
+        *Dans binding-two-way.components.ts :
+
+            ?Dans export class : 
+            -> public nom:string;
+            ?Dans le constructor : 
+            -> this.nom=""; 
+
+            exemple :
+
+            export class BindingTwoWayComponent implements OnInit {
+                public nom : string;
+                constructor() {
+                    this.nom="";
+                }
+                ngOnInit(): void {
+                }
+            }
+    
+        *Dans app.module.ts :
+            -> Ajoutez FormsModule dans import.
+
+        *Dans app-routing.module.ts :
+            -> Ajoutez route:
+            {path:"two-way", component:BindingTwoWayComponent}
+
+
+        *Dans app.conmponents.html :
+            ?Dans le nav>ul>li>a ajoutez :(ligne bleue)
+            <nav>
+                <ul>
+                    <li>
+                        <a routerLink="/home">
+                            <div>Lien 1</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/home/coucou">
+                            <div>Lien 2</div>
+                        </a>
+                    </li>
+                ?   <li>
+                ?        <a routerLink="/two-way">
+                ?            <div>Bindings Two Way</div>
+                ?        </a>
+                ?    </li>
+
+    ! Créer binding-event : 
+        -> ng g c components/binding-event
+
+        *Dans binding-event.composent.ts :
+            -> public cpt:number;
+
+            Dans constructor :
+            -> this.cpt=0;
+
+            En dessous de ngOnInit ;
+            public addOne(){
+                this.cpt++;
+            }
+        
+        *Dans binding-event.html :
+
+            -> un h1 {{this.cpt}}
+            <input type="button" (mouseover)="addOne()">
+
+        !Faire routing :
+
+        *dans app-routing ;
+        dans route :
+        {path:"event", component:BindingEventComponent},
+
+        *dans app.component.html, 
+            <li>
+                <a routerLink="/event">
+                    <div>Bindings Event</div>
+                </a>
+            </li>
+
+    !Créé le binding-attribute : 
+        
+        -> ng g c components/binding-attribute
+        
+        *Dans le html de vinding-attribute :
+            -> <input type="button" [value]="stateText" [disabled]="state">
+            -> <label> Activer ? </label><input type="checkbox" [(ngModel)]="state">
+
+        *Dans binding-attribute.composent.ts :
+            ajoutez : 
+
+            public stateText:string;
+            public state:boolean;
+            constructor() {
+                this.stateText = "On";
+                this.state = true;
+            }
+
+            public switchBtn(){
+                this.stateText = (this.stateText === "On")?"Off":"On";
+            }
+
+        *Dans le HTML de b-a :
+            <input type="button" [value]="stateText" [disabled]="state" (click)="switchBtn()">
+            <label>Activer ?</label><input type="checkbox" [(ngModel)]="state" [checked]="state">
+
+        *Dans le app.component.html :
+            Ajoutez :
+                <li>
+                    <a routerLink="/attribute">
+                        <div>Bindings Attribute</div>
+                    </a>
+                </li>
+
+        *Dans le app-routing.module.ts :
+            {path:"attribute", component:BindingAttributeComponent}
+        
+            ? le "!" est un operateur logique oposé boolean ("not")
+
+*_____________________________ Angular________Chapitre_4________________________________________________________________________.<
+!Les pipes :
+
+    !Créez le pipes-date :
+        
+        -> ng g components/pipes-date
+
+        *Dans pipes-date.component.html :
+            -> <h1>Aujourd'hui nous somme le {{ now |date:'dd'}}</h1>
+            !-> Apres creation et personnalisation du pipes/french-month :
+            -> <h1>Aujourd'hui nous somme le {{ now | date:'dd'}} {{now | date:'M' | frenchMonth}}</h1>
+
+        *Dans app.component.html :
+            -> Ajoutez : <app-pipes-date></app-pipes-date>          < app-pipes-date est le nom du selector dans pipes-date.component.ts : @Component({ selector: 'app-pipes-date',
+            En dessous du "Bienvenue"
+
+        *Dans mon pipes-date.component.ts :
+            Ajoutez dans l'export : 
+            public get now(){return new Date();}
+
+    !Personnalisez le pipes-date en français :
+        
+        -> ng g pipe pipes/french-month
+
+        *Dans french-month.pipe.ts :
+            modifier la ligne :
+            transform(value: unknown, ...args: unknown[]): unknown {
+                return null;
+            }
+
+            !par :
+
+            export class FrenchMonthPipe implements PipeTransform {
+
+            transform(value:unknown): string{
+                value = Number(value);
+                let monthName = "Inconnu";
+                switch(value){
+                case 1:
+                    monthName = "Janvier"
+                    break;
+                case 2:
+                    monthName = "Fevrier"
+                    break;
+                case 3:
+                    monthName = "Mars"
+                    break;
+                case 4:
+                    monthName = "Avril"
+                    break;
+                case 5:
+                    monthName = "Mai"
+                    break;
+                case 6:
+                    monthName = "Juin"
+                    break;
+                case 7:
+                    monthName = "Juillet"
+                    break;
+                case 8:
+                    monthName = "Aout"
+                    break;
+                case 9:
+                    monthName = "Septembre"
+                    break;
+                case 10:
+                    monthName = "Octrobre"
+                    break;
+                case 11:
+                    monthName = "Novembre"
+                    break;
+                case 12:
+                    monthName = "Decembre"
+                    break;
+                }
+                return monthName
+                }
+            }
+        
+!Objet Complexe :
+    
+    !Créer une interface :
+        
+        -> ng g interface Models/Address
+
+    *Créer un nouveaux components :
+        
+        -> ng g c components/pipes-json
+
+    *Dans pipes-json.component.ts :
+        
+        -> Ajoutez (au dessus de constructor() >dans export): 
+            public address:Address;
+        -> Et dans le constructor :
+            constructor() {
+          ?     this.address = {
+          ?         Numero:"250bis",
+          ?         Rue:"Avenue des cerisiers",
+          ?         Localite:"Charleroi",
+          ?         CodePostale:"BE6220",
+          ?         Pays:"Belgique"
+          ?     };
+            }
+
+    *Dans address.ts de mon  fichier Models :
+        
+        -> Ajoutez dans l'export :
+        export interface Address {
+        ?    Numero:string;
+        ?    Rue:string;
+        ?    Localite:string;
+        ?    CodePostale:string;
+        ?    Pays:string;
+        }
+
+    *Dans pipes-json.component.ts :
+        
+        -> Dans le constructor
+                this.address = {
+                    Numero:"250bis",
+                    Rue:"Avenue des cerisiers",
+                    Localite:"Charleroi",
+                    CodePostale:"BE6220",
+                    Pays:"Belgique"
+                };
+
+    *Dans le pipe-json.component.html :
+        
+        ->  <textarea cols="32" rows="20" disabled>
+                {{address|json}}
+            </textarea>
+
+    *Dans le app-routing.module.ts :
+        
+        -> Rajoute la route :
+            {path:"pipe-json", component:PipesJsonComponent}
+    
+    *Dans mon app-component.html :
+        
+        rajouté la route : 
+        ?    <li>
+        ?        <a routerLink="/pipe-json">
+        ?            <div>Pipe Json</div>
+        ?        </a>
+        ?    </li>
+    
+*______________________________________________________Suite.<
+    
+	Pour permettre le partage créez le module Shared : ng g m Shared
+	Ensuite ng g p Shared/Pipes/ChronoFormat -m Shared 
+
+	Voir slide<
+
+	voir exo i3BED-Correctif; sur le chrono
+	
+*_____________________________ Angular________Chapitre_5____Les_Directives_________________________________________________________.<
+
+
+    !Demo :
+
+        -> Dans Projet i3-BED-Angular\first-app 
+    
+        *Terminal :
+            -> ng g c components/direct-comp
+        
+        *Dans app-routing.module :
+
+            Ajoutez route path{"direct-comp", component:DirectCompComponent},
+        
+        *Dans app.components.html :
+
+            <a routerLink="/direct-comp"></a>
+
+        *Dans direct-comp.component.html :
+
+            <h1>Je suis tout coloré !</h1>
+            <input type="color" [(ngModel)]="myColor">
+
+        *Dans direct-comp.component.ts :
+
+            ajoutez : 
+            Public myColor : string;            
+
+            dans constructor :{
+            this.myColor="#FF0000";
+            }
+
+        *Dans direct-comp.component.html :
+            
+            Ajoutez [ngStyle]="{color:myColor}" dans le h1 ;
+
+        ?   <h1 [ngStyle]="{color:myColor}">Je suis tout coloré!</h1>
+            <input type="color" [(ngModel)]="myColor">
+
+            !Autre exemple :
+            <h1 [ngStyle]="{
+                color:myColor,
+                position:'relatif',
+                left:leftOffset+'px'}">
+                Je suis tout coloré!
+            </h1>
+            <input type="color" [(ngModel)]="myColor">
+            <input type="range" min="0" max="100" [(ngModel)]="leftOffset">
+            !Puis dans direct-comp.component.ts :
+            !Rajouter : 
+            public leftOffset:number = 0;
+            }
+
+            ajoutez un <p class="important">Loremx</p>
+
+        *Dans direct-comp.component.scss :
+
+            .important{
+                color : white;
+                background-color : red;
+            }
+
+        *Dans direct-comp.component.html :
+
+        <p class="important">Loremx</p> devient :
+
+        <p [ngClass]="{
+            important:leftOffset > 50,
+            pasImportant: myColor.toLowerCase() != "#FF000".toLowerCase
+            }>
+            Loremx
+            {{myColor}}</p>
+
+        *Dans direct-comp.component.scss :
+            !Rajoutez :
+            .pasImportant{
+                border:solid 1px black;
+            }
+
+        *Dans direct-comp.component.ts : 
+
+            public myStyle : any = { 
+                "color" : "blue",
+                "background-color" : "yellow" 
+            }
+
+        *Dans direct-comp.component.html :
+
+            !Ajoutez :
+            <p [ngClass]="{myStyle}"> 2eme LOREM </p>
+
+        ! Créez un nouveaux component :
+
+            -> ng g c components/DirectStruct
+
+        *Dans app-routing.module.ts :
+
+            ajoutez dans : 
+                -> DirectStructComponent,
+
+        *Dans app-module.ts :
+
+            Ajoutez le {path:"direct-struct", component:DirectStructComponent},
+
+        *dans app.component.html :
+
+            rajoutez le <a routerLink="./
+
+        *Dans direct-struct.component.html :
+
+            <div *ngIf="show">
+                J'existe !                                              < n'apparait plus et n'est plus présent ! (il est ignoré)
+            </div>
+
+            <div *ngIf="!show">
+                J'existe plus !
+            </div>
+
+            <div [hidden]="!show"> Je suis caché </div>                 < n'apparait plus mais est toujours la 
+
+            <label>Afficher?</label> <input type="checkbox" [(ngModel)]="show">
+
+        *Dans direct-struct.component.ts :
+
+            !Dans le export class DirectStructComponent ..
+            
+            public show:boolean = false;
+            public addresses:Address[] = [];
+
+            !Dans constructor :
+
+            this.addresses.push({
+                Numero : "15",
+                Rue : "Avenue des oliviers",
+                Localite : "Bruxelles",
+                CodePostal: "BE1000",
+                Pays: "Belgique"
+            })
+            this.addresses.push({
+                Numero : "150",
+                Rue : "Avenue des fraises",
+                Localite : "Hainaut",
+                CodePostal: "BE6000",
+                Pays: "Belgique"
+            })
+            this.addresses.push({
+                Numero : "78",
+                Rue : "Avenue des tomates",
+                Localite : "Namur",
+                CodePostal: "BE5000",
+                Pays: "Belgique"
+            })
+        
+        *Dans direct-struct.component.html :
+
+            <ng-container *ngIf="show">
+                <ol>
+                    <ng-container *ngFor="let monAddress of addresses">
+                        <li>
+                            <div>Adresse :</div>
+                            <div> {{monAddress.Rue}} {{monAddress.Numero}} </div>
+                            <div>Localite :</div>
+                            <div> {{monAddress.CodePostal}} {{monAddress.Localite}} </div>
+                        </li>
+                    </ng-container>
+                </ol>
+            </ng-container>
+
+            ? dl -> est une liste de définition , definition list.
+            ? dt -> definition term -> le titre de la definition.
+            ? dd -> definition definition -> la definition en rapport avec le definition term. 
+
+            <h2>Laquel ne devrais pas exister ?</h2>
+            <div>
+                <label for="4fromages">4 fromages</label>
+                <input id="4fromages" value="4fromages" type="radio" name="pizza" [(ngModel)]="pizza">
+            </div>
+            <div>
+                <label for="hawaii">Hawaï</label> 
+                <input id="hawaii" value="hawaii" type="radio" name="pizza" [(ngModel)]="pizza">
+            </div>
+            <div>
+                <label for="margarita">Margarita</label> 
+                <input id="margarita" value="margarita" type="radio" name="pizza" [(ngModel)]="pizza">
+            </div>
+            <div>
+                <label for="prosciutto">Prosciutto</label> 
+                <input id="prosciutto" value="prosciutto" type="radio" name="pizza" [(ngModel)]="pizza">
+            </div>
+
+
+        *Dans direct-struct.component.ts :
+            public pizza:string = "";
+            
+        *html suite :
+            <ng-container [ngSwitch]="pizza">
+                <div *ngSwitchCase="'hawaii'">Vous avez bon gout !</div>
+                <div *ngSwitchCase="'margarita'">Cela se discute..</div>
+                <div *ngSwitchDefault>Il faudra vraiment tout vous apprendre.</div>
+            </ng-container>
+
+	*Autre exemple du ng container : 
+		<ng-container *ngFor="let mavariable of mavariables>
+		<ng-container *ngIf="link.children?.length === 0 || link.children === undefined">
+		<ng-container *ngIf="link.children !== undefined && link.childre.length > 0">
+
+		<li *ngFor="let child of link.children">
+			<a [routerLink]="child.url">
+				<div>
+					{{child.title}} 
+				</div>
+			</a>
+		</li>
+
+
+*_____________________________ Angular_____________Les_Services_________________________________________________________.<
+	
+    *Créez un service : (je reprend first-app) :
+
+        -> ng g c components/calculatrice
+
+        *Dans calculatrice.component.html :
+
+        <div> {{nb1}}
+            <br>
+            {{operation}}
+            <br>
+            {{nb2}}
+            <hr>
+            {{result}}
+        </div>
+        <input type="number" value=0>
+        <input type="button" value="+" (click)="addition()">
+        <input type="button" value="-" (click)="substraction()">
+        <input type="button" value="*" (click)="multiplication()">
+        <input type="button" value="/" (click)="division()">
+        <input type="button" value="=" (click)="equal()">
+        
+        *Dans calculatrice.component.ts :
+
+        public nb1 : number = 0;
+        public nb2 : number = 0;
+        public get result : number;
+        public operation? : string;
+
+        dans le fond =
+
+        public addition(){
+
+        }
+
+        public substraction(){}
+        public multiplication(){}
+        public division(){}
+        public equal(){}
+
+        *Dans app-routing :
+
+            rajoutez le path calcul 
+
+        *dans html app.component :
+        ajoutez le a routerLink="/calculatrice"
+
+        *Crée le service :
+            -> ng g s services/calcul
+
+        *Dans calcul.service.ts :
+
+            public result:number = 0;
+            constructor()
+            
+            public add(nb:number){
+                this.result += nb;
+            }
+            public sub(nb:number){
+                this.result -= nb;
+            }
+            public mul(nb:number){
+                this.result *= nb;
+            }
+            public div(nb:number){
+                this.result /= nb;
+            }
+
+        *Dans calculatrice.component.ts :
+
+            constructor(private _calculService : CalculService) {}
+
+            dans ngOnInit : {
+                this.result = this._calculService.result;
+            }
+
+        *Dans calculatrice.component.ts :
+    ? On peut donné un nom a nos balise avec "#" <input blabla #nb>
+        public addition(html : HTMPInputElement){
+            this.nb2 = Number(html.value);
+            this.operation = "+"
+            html.value = "0";
+        }
+
+        public substraction(html : HTMPInputElement){
+            this.nb2 = Number(html.value);
+            this.operation = "-";
+            html.value = "0";
+        }
+        public multiplication(html : HTMPInputElement){
+            this.nb2 = Number(html.value);
+            this.operation = "*"
+            html.value = "0";
+        }
+        public division(html : HTMPInputElement){
+            this.nb2 = Number(html.value);
+            this.operation = "/"
+            html.value = "0";
+        }
+        public equal(html : HTMPInputElement){
+            this.nb1 = this.nb2
+            this.nb2 
+            switch(this.operation){
+                case "+":
+                    this._calculService.add(this.nb2)
+                    break;
+                case "-":
+                    this._calculService.sub(this.nb2)
+            }
+        }
+
+
+
+
+!Demo : 
+
+    *Créez d'abord les components qui contiendront un service :
+        -> ng g 
+
+*_____________________________ Angular_____________Observable_________________________________________________________.<    
+
+	OnInit<> Ma porte d'entrée dans mon components -> active les service (par exemple un robinet coule quand je rentre.)
+    OnDestroy Ma porte de sortie -> Arrête les services (stop le robinet pour ne pas inondé la piece.)
+
+    Asynchrome et synchrome <
+
+*_____________________________ Angular_____________HTTPClient_________________________________________________________.< 
+
+
+    API <> Angular :
+
+    Get -> Récupere les donnée -> this._httpClient.get(this.url)
+    Post -> Envoi des donnée -> this._httpClient.post(this.url, {prop1 : "content"})
+    Put -> Modification de donnée -> this._httpClient.put(this.url, {myProp:"content"})
+    Delete -> Suppression de donnée -> this._httpClient.delete(this.url+id)
+
+    !Demo : 
+
+        -> ng g c components/country          < Pour travaillé les API
+
+        * Créez un service pour faire la communication entre API et Angular :
+
+        -> ng g s services/countryApi 
+
+        *Dans app-routing ;
+            -> créez la route country , {path:"country", component: }
+
+        *Dans app-component :
+            -> <a routerLink="/contry">
+
+        *Dans country-api.service.ts :
+
+            -> dans constructor(private _http: HttpClient ){}
+            importé le httpClientModule dans app.module tout en haut :
+            -> import { HttpClientModule } from '@angular/common/http';
+
+            pour le country.api.service.ts :
+            -> import { HttpClient } from '@angular/common/http';
+
+        *Prendre API : https://restcountries.eu/
+
+            dans country.api.service.ts :
+
+            au dessu du constructor :
+
+                -> private _url : string = "https://restcountries.eu/rest/v2/"
+                   
+                (importé Observable from "rxjs';)
+
+                public getAllCountries():Observable<any>{
+                    return this._http.get(this._url+'all/');
+                }
+
+        *Dans contry.component.ts :
+
+            -> public allCountries : any[] = [];
+
+            constructor(private _countryApiService:CountruApiService){}
+
+            !dans le ngOninit : {
+                this._countryApiService.getAllCountries().subcribe(
+                    (cs) => this.allCountries = cs,
+                    (e) => console.error(e),
+                    ()=>console.log("Fin du traitement")
+                );
+                console.log('fin du init');
+            }
+
+        *Dans country.component.html :
+
+            <input type="text" [(ngModel)]="code"> <input type="button" (click)="getOneCountries()" value="Send">
+            <textarea cols="300" rows="1000" disabled> {{allCountries|json}} </textarea>
+            
+            récuperé une info :
+            dans contry.component :
+            
+            public getAllCountries():Observable<any>{
+                return this._http.get(this._url+'all/');
+            }
+
+            public getOneCountries(){
+                this._countryApiService.getOneCountries(this.code).subscribe(
+                    (c)=> this.allCountries = c,
+                    (e)=> console.error(e),
+                    ()=> console.log('Fin de traitement')
+                );
+            }
+
+*______________________________ Ajoutez Material sur Angular : 
+
+    -> https://material.angular.io/guide/getting-started
+
