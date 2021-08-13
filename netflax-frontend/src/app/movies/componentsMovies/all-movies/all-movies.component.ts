@@ -1,3 +1,5 @@
+import { Movie } from './../../../models/movie';
+import { MoviesAPIService } from './../../../services/movies-api.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AllMoviesComponent implements OnInit {
 
-  constructor() { }
+  public movie: any;
+  public allMovies: any[] = []
+
+  constructor(private _api: MoviesAPIService) { }
 
   ngOnInit(): void {
+    this._api.getAllMovies().subscribe(res => this.allMovies = res);
   }
 
 }
