@@ -1,0 +1,35 @@
+<nav>
+    <ul>
+        <ng-container *ngFor="let link of links">           <!-- ngFor permet de lire l'ensemble des liens -->
+            <li *ngIf="link.isVisible || link.isVisible === undefined"> <!-- ngIf vérifie si le lien doit être visible ou non-->
+                <ng-container *ngIf="link.children?.length === 0 || link.children === undefined"> <!-- ngIf verifie que le lien n'a pas d'enfant pour lui permettre d'être cliquable-->
+                    <a *ngIf='link.url' [routerLink]="link.url"> <!-- ngIf verifie que le lien existe pour lui permettre d'être cliquable-->
+                        <div>
+                            {{link.title}}
+                        </div>
+                    </a>
+                    <div *ngIf='!link.url'> <!-- ngIf verifie que le lien n'existe pas pour lui empêcher d'être cliquable-->
+                        {{link.title}}
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="link.children !== undefined && link.children.length > 0"> <!-- ngIf verifie que le lien a des enfants pour lui empêcher d'être cliquable-->
+                    <div>
+                        {{link.title}}
+                    </div>
+                    <ul>
+                        <li *ngFor="let child of link.children"> <!-- ngFor permet de créer de nouveau lien pour les enfants-->
+                            <a *ngIf='child.url' [routerLink]="child.url">  <!-- ngIf verifie que le lien existe pour lui permettre d'être cliquable-->
+                                <div>
+                                    {{child.title}}
+                                </div>
+                            </a>
+                            <div *ngIf='!child.url'> <!-- ngIf verifie que le lien n'existe pas pour lui empêcher d'être cliquable-->
+                                {{child.title}}
+                            </div>
+                        </li>
+                    </ul>
+                </ng-container>
+            </li>
+        </ng-container>
+    </ul>
+</nav>

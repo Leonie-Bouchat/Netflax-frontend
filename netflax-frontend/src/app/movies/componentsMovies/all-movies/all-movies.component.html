@@ -1,5 +1,6 @@
 <p>all-movies works!</p>
 <ng-container *ngFor='let movie of allMovies'>
-    {{movie.Title}}
+    <a routerLink="movies/"><div>{{movie.Title}}</div></a>
+    
 </ng-container>
 

@@ -1,0 +1,22 @@
+.footer{
+    background-color: grey;
+}
+
+.footerContainer{
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+.navigation{
+    position: absolute;
+    right: 20px;
+    top: 40px;
+}
+
+.netflax{
+    font-size: 20px;
+    font-weight: 600;
+    color: rgb(27, 73, 117)
+}

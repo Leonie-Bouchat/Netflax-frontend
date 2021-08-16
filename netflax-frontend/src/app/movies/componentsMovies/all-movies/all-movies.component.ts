@@ -9,13 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AllMoviesComponent implements OnInit {
 
+  public allMovies: any[] = [];
   public movie: any;
-  public allMovies: any[] = []
 
   constructor(private _api: MoviesAPIService) { }
 
   ngOnInit(): void {
     this._api.getAllMovies().subscribe(res => this.allMovies = res);
+    // this._api.getOneMovie().subscribe(res => this.movie = res);
   }
 
 }

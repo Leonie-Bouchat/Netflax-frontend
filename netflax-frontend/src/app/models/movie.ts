@@ -1,5 +1,12 @@
+import { Actor } from './actor';
+import { Type } from './type';
+
 export interface Movie {
-    title: string;
-    summary: string;
-    id: number;
+    IdMovie: number;
+    Title: string;
+    ReleaseDate?: Date;
+    Summary?: string;
+    Type?: Type[];
+    Actor?: Actor[];
+
 }

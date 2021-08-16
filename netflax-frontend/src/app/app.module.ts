@@ -9,13 +9,15 @@ import { NavComponent } from './componentsIndex/nav/nav.component';
 import { FooterComponent } from './componentsIndex/footer/footer.component';
 import { HomeComponent } from './componentsIndex/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MoviesHomeComponent } from './movies/componentsMovies/movies-home/movies-home.component';
+// import { MoviesComponent } from './movies/componentsMovies/movies/movies.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     FooterComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
