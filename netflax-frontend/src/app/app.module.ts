@@ -1,3 +1,4 @@
+import { AllMoviesComponent } from './movies/componentsMovies/all-movies/all-movies.component';
 import { ActorsModule } from './actors/actors.module';
 import { MoviesModule } from './movies/movies.module';
 import { NgModule } from '@angular/core';

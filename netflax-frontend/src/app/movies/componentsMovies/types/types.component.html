@@ -1,1 +1,10 @@
-<p>types works!</p>
+<div *ngIf="allMovies.length > 0">
+    <ng-container *ngFor='let movie of allMovies'>
+        <div>
+            <p>{{movie.Title}}</p>
+            <a [routerLink]="movie.IdMovie.toString()"><button>Plus d'infos</button></a>
+        </div>
+    
+    </ng-container>
+</div>
+<div *ngIf="allMovies.length == 0">La liste est en cours de chargement</div>

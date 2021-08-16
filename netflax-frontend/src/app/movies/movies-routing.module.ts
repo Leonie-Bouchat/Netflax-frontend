@@ -7,12 +7,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'movies', pathMatch: 'full'},
-  {path: 'movies', component: MoviesHomeComponent},
-  {path: 'movies/all', component: AllMoviesComponent},
-  {path: 'movies/:id', component: MovieComponent},
-  {path: 'movies/release-date', component: ReleaseDateComponent},
-  {path: 'movies/types', component: TypesComponent},
+  // {path: '', redirectTo: 'movies', pathMatch: 'full'},
+  {path: '', component: MoviesHomeComponent},
+  {path: 'all', component: AllMoviesComponent},
+  {path: ':id', component: MovieComponent},
+  {path: 'release-date', component: ReleaseDateComponent},
+  {path: 'types', component: TypesComponent},
 ];
 
 @NgModule({
