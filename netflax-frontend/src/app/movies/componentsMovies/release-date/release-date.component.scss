@@ -1,0 +1,31 @@
+table{
+    margin-top: 50px;
+    margin: auto;
+    width: 80%;
+}
+
+button{
+    background-color: #3a6fa0;
+    color: black;
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 25% 10%;
+    font-size: 15px;
+    right: 200px;
+}
+
+td{
+    text-align: left;
+    // display: flex;
+    // position: space-between;
+}
+
+tbody{
+    display: flex;
+    position: space-around;
+}
+
+.title{
+    font-weight: bold;
+    font-size: 20px;
+}

@@ -1,0 +1,17 @@
+h1{
+    text-align: center;
+}
+
+.button{
+    display: flex;
+    justify-content: space-around;
+}
+
+button{
+    background-color: #3a6fa0;
+    color: black;
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 25% 10%;
+    font-size: 30px;
+}

@@ -1,0 +1,30 @@
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0px;
+    background-color: #3a6fa0;
+    left: 0; 
+    right: 0;
+    padding: 15px;
+    height: 40px;
+}
+
+nav ul{
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    gap: 2em;
+}
+
+nav a{
+    text-decoration: none;
+    color:rgb(86, 86, 95)
+}
+
+.netflax{
+    font-size: 2em;
+    color: rgb(245, 245, 248);
+    font-weight: 400;
+}

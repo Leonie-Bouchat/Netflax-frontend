@@ -7,9 +7,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MoviesHomeComponent implements OnInit {
 
+  title: boolean = false;
+  date: boolean = false;
+  type: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public showTitle(){
+    this.title = true;
+    this.date = false;
+    this.type = false;
+  }
+
+  public showDate(){
+    this.title = false;
+    this.date = true;
+    this.type = false;
+  }
+
+  public showType(){
+    this.title = false;
+    this.date = false;
+    this.type = true;
   }
 
 }

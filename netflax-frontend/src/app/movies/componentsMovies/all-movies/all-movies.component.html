@@ -1,13 +1,13 @@
-<p>all-movies works!</p>
-<div *ngIf="allMovies.length > 0">
+<ng-container *ngIf="allMovies.length > 0">
     <ng-container *ngFor='let movie of allMovies'>
-        <div>
-            <p>{{movie.Title}}</p>
-            <a [routerLink]="movie.IdMovie.toString()"><button>Plus d'infos</button></a>
-        </div>
-    
+        <table>
+            <tr>
+                <td class="title">{{movie.Title}}</td>
+                <td><a [routerLink]="movie.IdMovie.toString()"><button>Plus d'infos</button></a></td>
+            </tr>
+        </table>
     </ng-container>
-</div>
+</ng-container>
 <div *ngIf="allMovies.length == 0">La liste est en cours de chargement</div>
 
 

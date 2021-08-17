@@ -23,8 +23,21 @@ export class MoviesAPIService {
     return this._localAPI.get<MovieAll>(this._localURL+'/movies/'+id);
   } 
 
-  public getAllMoviesByType(): Observable<Movie[]>{
-    return this._localAPI.get<Movie[]>(this._localURL+'/movies/date')
+  public getAllMoviesByDate(): Observable<Movie[]>{
+    return this._localAPI.get<Movie[]>(this._localURL+'/movies/date');
+  }
+
+  public getAllTypes(): Observable<Type[]>{
+    return this._localAPI.get<Type[]>(this._localURL+'/movies/types/all')
+  }
+
+  public getOneType(id: number): Observable<Movie[]>{
+    return this._localAPI.get<Movie[]>(this._localURL+'/movies/types/'+id+'/movies')
+
+  }
+
+  public getAllTypesByMovieId(id: number) : Observable<Type[]>{
+    return this._localAPI.get<Type[]>(this._localURL+'movies/'+id+'/types')
   }
 
   public async getOneFullMovie(id:number) : Promise<Movie>{

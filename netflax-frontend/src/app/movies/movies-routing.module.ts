@@ -13,6 +13,7 @@ const routes: Routes = [
   {path: ':id', component: MovieComponent},
   {path: 'release-date', component: ReleaseDateComponent},
   {path: 'types', component: TypesComponent},
+  {path: 'type/:id', component: AllMoviesComponent},
 ];
 
 @NgModule({
