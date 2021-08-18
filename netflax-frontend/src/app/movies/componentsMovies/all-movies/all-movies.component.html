@@ -1,12 +1,12 @@
 <ng-container *ngIf="allMovies.length > 0">
-    <ng-container *ngFor='let movie of allMovies'>
-        <table>
+    <table>
+        <ng-container *ngFor='let movie of allMovies'>
             <tr>
                 <td class="title">{{movie.Title}}</td>
                 <td><a [routerLink]="movie.IdMovie.toString()"><button>Plus d'infos</button></a></td>
             </tr>
-        </table>
-    </ng-container>
+        </ng-container>
+    </table>
 </ng-container>
 <div *ngIf="allMovies.length == 0">La liste est en cours de chargement</div>
 

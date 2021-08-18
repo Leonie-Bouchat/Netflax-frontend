@@ -1,4 +1,5 @@
-import { Movie } from './../../../models/movie';
+import { Type } from './../../../models/type';
+import { MovieAll } from './../../../models/movie-all';
 import { MoviesAPIService } from './../../../services/movies-api.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
@@ -10,22 +11,33 @@ import { ActivatedRoute, Params } from '@angular/router';
 })
 export class MovieComponent implements OnInit {
 
-  public movie?: Movie;
-  private _id?: number;
+  public movie?: MovieAll;
+  private _id: number = 0;
+  // public type: Type[] = []
+  public img: string = "https://image.tmdb.org/t/p/w500";
+  public video: string = "";
+
 
   constructor(private _api: MoviesAPIService, private _route: ActivatedRoute) { 
   }
 
   ngOnInit(): void {
-    this._route.params.subscribe(
-      (params:any) => this.onIdreceived(params)
-    )
-
+    this._route.params.subscribe(p => {
+      this._id = p.id;
+      this._api.getOneMovie(this._id).subscribe(res =>{
+        console.log(res);
+         this.movie = res
+         this._api.getAllTypesByMovieId(this._id).subscribe(res => {
+          if(this.movie){
+            this.movie.Type = res;
+          }
+        });
+        this._api.getAllActorsByMovieId(this._id).subscribe(res => {
+          if(this.movie){
+            this.movie.Actor = res;
+          }
+        })
+      });
+    })
   }
-
-  private onIdreceived(params:Params){
-    this._id = parseInt(params['id']);
-    this._api.getOneMovie(this._id).subscribe(res => this.movie = res);
-  }
-
 }

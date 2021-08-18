@@ -1,3 +1,37 @@
-<p>movie works!</p>
+<a [routerLink]="'/movies'"><button>Retour</button></a>
+<div class="body">
+    <ng-container *ngIf="movie">
+        <div class="title">{{movie.Title}}</div>
+        <img src="{{this.img+movie.Picture}}" alt="Image de {{movie.Title}} non disponible">
+        <div class="releaseDate">
+            <p class="soustitle">Année de sortie :</p> 
+            {{movie.ReleaseDate | date:'yyyy'}}
+        </div>
+        <div class="summary">
+            <p class="soustitle">Résumé : </p>
+            {{movie.Summary}}
+        </div>
 
-<div>{{movie | json }}</div>
+        <ng-container *ngIf="movie.Type">
+            <p class="soustitle">Genres :</p>
+            <ng-container *ngFor="let type of movie.Type">
+                <p><a [routerLink]="'/movies/type/'+type.IdGenre" class="typeLabel"><div>{{type.Label}}</div></a></p>
+            </ng-container>
+        </ng-container>
+        
+        <ng-container *ngIf="movie.Actor">
+            <p class="soustitle">Acteurs :</p>
+            <ng-container *ngFor="let actor of movie.Actor">
+                <div>{{actor.FirstName}} {{actor.LastName}}</div>
+            </ng-container>
+        </ng-container>
+
+        <iframe width="674" height="379" src="{{video}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <!-- https://www.youtube.com/watch?v=vZ734NWnAHA -->
+        <!-- https://www.youtube.com/embed/vZ734NWnAHA  -->
+
+    </ng-container>
+</div>
+
+
+

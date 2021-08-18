@@ -1,3 +1,4 @@
+import { OneTypeComponent } from './componentsMovies/one-type/one-type.component';
 import { MoviesHomeComponent } from './componentsMovies/movies-home/movies-home.component';
 import { TypesComponent } from './componentsMovies/types/types.component';
 import { ReleaseDateComponent } from './componentsMovies/release-date/release-date.component';
@@ -13,7 +14,7 @@ const routes: Routes = [
   {path: ':id', component: MovieComponent},
   {path: 'release-date', component: ReleaseDateComponent},
   {path: 'types', component: TypesComponent},
-  {path: 'type/:id', component: AllMoviesComponent},
+  {path: 'type/:id', component: OneTypeComponent},
 ];
 
 @NgModule({

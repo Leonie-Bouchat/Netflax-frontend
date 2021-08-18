@@ -1,3 +1,5 @@
+import { ActorAll } from './../models/actor-all';
+import { Actor } from './../models/actor';
 import { MovieAll } from './../models/movie-all';
 import { Type } from './../models/type';
 import { Injectable } from '@angular/core';
@@ -37,24 +39,22 @@ export class MoviesAPIService {
   }
 
   public getAllTypesByMovieId(id: number) : Observable<Type[]>{
-    return this._localAPI.get<Type[]>(this._localURL+'movies/'+id+'/types')
+    return this._localAPI.get<Type[]>(this._localURL+'/movies/'+id+'/types')
   }
 
-  public async getOneFullMovie(id:number) : Promise<Movie>{
-    let movie: Movie = {IdMovie:0, Title: "not found"};
-    await this._localAPI.get<Movie>(this._localURL+'/movies/'+id).subscribe(data => {
-      movie = data;
-      // this._localAPI.get<any>(this._localURL+'/movies/genre/'+id).subscribe(genres => {
-      //   movie.Type = genres;
-      // })
-      // this._localAPI.get<any>(this._localURL+'/actors/'+id).subscribe(actors => {
-      //   movie.Actor = actors;
-      // })
-    });
-    return movie;
-  } 
+  public getAllActorsByMovieId(id: number) : Observable<Actor[]>{
+    return this._localAPI.get<Actor[]>(this._localURL+'/movies/'+id+'/actors')
+  }
 
-  // public getOneMovie(id:number) : Observable<Movie[]>{
-  //   return this._localAPI.get<Movie[]>(this._localURL+'/movies/'+id);
-  // } 
+  public getAllActors() : Observable<Actor[]>{
+    return this._localAPI.get<Actor[]>(this._localURL+'/actors/all')
+  }
+
+  public getOneActor(id: number) : Observable<ActorAll>{
+    return this._localAPI.get<ActorAll>(this._localURL+'/actors/'+id)
+  }
+
+  public getAllMoviesByActorId(id: number) : Observable<Movie[]>{
+    return this._localAPI.get<Movie[]>(this._localURL+'/actors/'+id+'/movies')
+  }
 }

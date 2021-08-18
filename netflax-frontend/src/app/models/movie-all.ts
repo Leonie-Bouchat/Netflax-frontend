@@ -4,10 +4,10 @@ import { Type } from './type';
 export interface MovieAll {
     IdMovie: number;
     Title: string;
-    Summary?: string;
+    Summary: string;
     Trailer?: string;
     Picture?: string;
     ReleaseDate?: Date;
-    Type?: Type[];
+    Type: Type[];
     Actor?: Actor[];
 }

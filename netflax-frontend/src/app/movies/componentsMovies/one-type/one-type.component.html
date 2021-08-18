@@ -1,0 +1,11 @@
+<ng-container *ngIf="allMoviesByType.length > 0">
+    <ng-container *ngFor='let movie of allMoviesByType'>
+        <table>
+            <tr>
+                <td class="title">{{movie.Title}}</td>
+                <td><a [routerLink]="'/movies/'+movie.IdMovie.toString()"><button>Plus d'infos</button></a></td>
+            </tr>
+        </table>
+    </ng-container>
+</ng-container>
+<div *ngIf="allMoviesByType.length == 0">La liste est en cours de chargement</div>

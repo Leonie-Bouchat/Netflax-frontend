@@ -4,9 +4,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'all-actors', pathMatch:'full'},
-  {path: 'all-actors', component: AllActorsComponent},
-  {path: 'actor', component: ActorComponent},
+  {path: '', component: AllActorsComponent},
+  {path: ':id', component: ActorComponent},
 ];
 
 @NgModule({
