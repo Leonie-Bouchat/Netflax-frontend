@@ -33,7 +33,7 @@ export class MoviesAPIService {
     return this._localAPI.get<Type[]>(this._localURL+'/movies/types/all')
   }
 
-  public getOneType(id: number): Observable<Movie[]>{
+  public getAllMoviesByTypeId(id: number): Observable<Movie[]>{
     return this._localAPI.get<Movie[]>(this._localURL+'/movies/types/'+id+'/movies')
 
   }
@@ -56,5 +56,9 @@ export class MoviesAPIService {
 
   public getAllMoviesByActorId(id: number) : Observable<Movie[]>{
     return this._localAPI.get<Movie[]>(this._localURL+'/actors/'+id+'/movies')
+  }
+
+  public getOneType(id: number) : Observable<Type>{
+    return this._localAPI.get<Type>(this._localURL+'/movies/types/'+id)
   }
 }

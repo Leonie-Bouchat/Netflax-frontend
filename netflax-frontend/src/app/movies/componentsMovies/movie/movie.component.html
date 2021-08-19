@@ -1,4 +1,4 @@
-<a [routerLink]="'/movies'"><button>Retour</button></a>
+<a [routerLink]="'/movies'"><button class="back">Retour</button></a>
 <div class="body">
     <ng-container *ngIf="movie">
         <div class="title">{{movie.Title}}</div>
@@ -12,21 +12,21 @@
             {{movie.Summary}}
         </div>
 
-        <ng-container *ngIf="movie.Type">
+        <ng-container *ngIf="movie.Type.length != 0">
             <p class="soustitle">Genres :</p>
             <ng-container *ngFor="let type of movie.Type">
                 <p><a [routerLink]="'/movies/type/'+type.IdGenre" class="typeLabel"><div>{{type.Label}}</div></a></p>
             </ng-container>
         </ng-container>
         
-        <ng-container *ngIf="movie.Actor">
+        <ng-container *ngIf="movie.Actor.length != 0">
             <p class="soustitle">Acteurs :</p>
             <ng-container *ngFor="let actor of movie.Actor">
                 <div>{{actor.FirstName}} {{actor.LastName}}</div>
             </ng-container>
         </ng-container>
-
-        <iframe width="674" height="379" src="{{video}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <ng-container ></ng-container>
+        <iframe width="674" height="379" [src]="this.video | sanitizeUrl " title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         <!-- https://www.youtube.com/watch?v=vZ734NWnAHA -->
         <!-- https://www.youtube.com/embed/vZ734NWnAHA  -->
 

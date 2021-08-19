@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MoviesRoutingModule } from './movies-routing.module';
@@ -20,7 +21,8 @@ import { OneTypeComponent } from './componentsMovies/one-type/one-type.component
   ],
   imports: [
     CommonModule,
-    MoviesRoutingModule
+    MoviesRoutingModule,
+    SharedModule
   ]
 })
 export class MoviesModule { }

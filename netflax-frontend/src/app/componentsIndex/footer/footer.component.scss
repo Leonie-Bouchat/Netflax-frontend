@@ -1,5 +1,8 @@
 .footer{
     background-color: #3a6fa0;
+    right: 0;
+    left:0;
+    height: 15vh;
 }
 
 .footerContainer{
@@ -7,16 +10,32 @@
     display: flex;
     flex-direction: row;
     position: relative;
+    background-color: #3a6fa0;
 }
 
 .navigation{
     position: absolute;
-    right: 20px;
-    top: 40px;
+    right: 40px;
+    top: 25px;
+}
+
+.informations{
+    position: relative;
+    left: 60px;
 }
 
 .netflax{
     font-size: 20px;
     font-weight: 600;
-    color: grey;
+    color: rgb(245, 245, 248);
+}
+
+button{
+    background-color: black;
+    color: #3a6fa0;
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 25% 10%;
+    font-size: 15px;
+    right: 200px;
 }

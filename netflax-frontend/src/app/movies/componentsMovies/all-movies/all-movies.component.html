@@ -2,6 +2,7 @@
     <table>
         <ng-container *ngFor='let movie of allMovies'>
             <tr>
+                <td><img [src]="this.img+movie.Picture" alt="Image de {{movie.Title}} non disponible" height="70" width="50"></td>
                 <td class="title">{{movie.Title}}</td>
                 <td><a [routerLink]="movie.IdMovie.toString()"><button>Plus d'infos</button></a></td>
             </tr>

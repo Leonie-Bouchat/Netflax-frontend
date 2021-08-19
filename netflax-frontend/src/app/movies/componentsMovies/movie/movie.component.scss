@@ -11,7 +11,8 @@ button{
 .title{
     text-align: center;
     font-size: 30px;
-    color: rgb(226, 73, 73)
+    color: rgb(226, 73, 73);
+    margin: 30px;
 }
 
 .body{
@@ -26,4 +27,16 @@ button{
 
 .typeLabel{
     text-decoration: none;
+}
+
+
+.back{
+    background-color: #3a6fa0;
+    color: black;
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 25% 10%;
+    font-size: 30px;
+    position: fixed;
+    left: 20px;
 }

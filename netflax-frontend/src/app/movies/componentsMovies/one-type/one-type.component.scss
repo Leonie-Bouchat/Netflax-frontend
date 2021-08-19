@@ -1,0 +1,46 @@
+table{
+    margin-top: 50px;
+    margin: auto;
+    width: 80%;
+    text-align: left;
+}
+
+.moreInfos{
+    background-color: #3a6fa0;
+    color: black;
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 25% 10%;
+    font-size: 15px;
+    right: 200px;
+}
+
+.filmTitle{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.title{
+    text-align: center;
+    font-size: 30px;
+    color: rgb(226, 73, 73);
+    margin: 30px;
+}
+
+.body{
+    text-align: center;
+    width: 70%;
+    margin: auto;
+    min-height: 75vh;
+}
+
+.back{
+    background-color: #3a6fa0;
+    color: black;
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 25% 10%;
+    font-size: 30px;
+    position: fixed;
+    left: 20px;
+}

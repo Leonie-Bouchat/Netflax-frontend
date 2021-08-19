@@ -12,6 +12,7 @@ export class AllMoviesComponent implements OnInit {
 
   public allMovies: Movie[] = [];
   public movie: any;
+  public img: string = "https://image.tmdb.org/t/p/w500";
 
   constructor(private _api: MoviesAPIService, private _route: ActivatedRoute) { }
 
@@ -19,7 +20,7 @@ export class AllMoviesComponent implements OnInit {
     this._route.params.subscribe(p => {
       let id = p.id;
       if(id){
-        this._api.getOneType(id).subscribe(res => {this.allMovies = res})
+        this._api.getAllMoviesByTypeId(id).subscribe(res => {this.allMovies = res})
       }
       else this._api.getAllMovies().subscribe(res => this.allMovies = res);
     });

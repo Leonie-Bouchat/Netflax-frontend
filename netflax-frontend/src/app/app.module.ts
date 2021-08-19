@@ -11,6 +11,7 @@ import { FooterComponent } from './componentsIndex/footer/footer.component';
 import { HomeComponent } from './componentsIndex/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MoviesHomeComponent } from './movies/componentsMovies/movies-home/movies-home.component';
+import { SanitizeUrlPipe } from './pipes/sanitize-url.pipe';
 // import { MoviesComponent } from './movies/componentsMovies/movies/movies.component';
 
 @NgModule({

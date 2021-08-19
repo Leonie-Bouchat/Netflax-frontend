@@ -1,12 +1,15 @@
-<ng-container *ngIf="allMovies.length > 0">
-    <ng-container *ngFor='let movie of allMovies'>
+<div class="body">
+    <ng-container *ngIf="allMovies.length > 0">
         <table>
-            <tbody>
-                <td>{{movie.ReleaseDate |date:'yyyy'}}</td>
-                <td class="title">{{movie.Title}}</td>
-                <td><a [routerLink]="movie.IdMovie.toString()"><button>Plus d'infos</button></a></td>
-            </tbody>
+            <ng-container *ngFor='let movie of allMovies'>
+                    <tr>
+                        <td class="year">{{movie.ReleaseDate |date:'yyyy'}}</td>
+                        <td class="title">{{movie.Title}}</td>
+                        <td><a [routerLink]="movie.IdMovie.toString()"><button>Plus d'infos</button></a></td>
+                    </tr>
+            </ng-container>
         </table>
     </ng-container>
-</ng-container>
-<div *ngIf="allMovies.length == 0">La liste est en cours de chargement</div>
+    <div *ngIf="allMovies.length == 0">La liste est en cours de chargement ...</div>
+</div>
+

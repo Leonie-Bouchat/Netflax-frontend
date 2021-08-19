@@ -1,11 +1,21 @@
-<ng-container *ngIf="allMoviesByType.length > 0">
-    <ng-container *ngFor='let movie of allMoviesByType'>
-        <table>
-            <tr>
-                <td class="title">{{movie.Title}}</td>
-                <td><a [routerLink]="'/movies/'+movie.IdMovie.toString()"><button>Plus d'infos</button></a></td>
-            </tr>
-        </table>
-    </ng-container>
-</ng-container>
-<div *ngIf="allMoviesByType.length == 0">La liste est en cours de chargement</div>
+<div class="body">
+    <a [routerLink]="'/movies'"><button class="back">Retour</button></a>
+    <div class="body">
+        <ng-container *ngIf="type">
+            <div class='title'>{{type.Label}}</div>
+        </ng-container>
+        <ng-container *ngIf="allMoviesByType.length > 0">
+            <table>
+                <ng-container *ngFor='let movie of allMoviesByType'>
+                    <tr>
+                        <td><img [src]="this.img + movie.Picture" alt="Image de {{movie.Title}} non disponible" height="70" width="50"></td>
+                        <td class="filmTitle">{{movie.Title}}</td>
+                        <td><a [routerLink]="'/movies/'+movie.IdMovie.toString()"><button class="moreInfos">Plus d'infos</button></a></td>
+                    </tr>
+            </ng-container>
+            </table>
+        </ng-container>
+        <div *ngIf="allMoviesByType.length == 0">La liste est en cours de chargement</div>    
+    </div>
+</div>
+

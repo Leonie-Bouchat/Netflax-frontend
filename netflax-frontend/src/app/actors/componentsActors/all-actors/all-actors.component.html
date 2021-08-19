@@ -1,12 +1,12 @@
-<h1>Acteurs</h1>
-<p>Cliquez sur le nom de votre acteur favori pour voir tous les films dans lesquels il a joué !</p>
-<ng-container *ngIf="allActors.length > 0">
-    <ng-container *ngFor='let actor of allActors'>
-        <table>
-            <tr>
+<div class="body">
+    <h1>Acteurs</h1>
+    <p>Cliquez sur le nom de votre acteur favori pour voir tous les films dans lesquels il a joué !</p>
+    <ng-container *ngIf="allActors.length > 0">
+        <ng-container *ngFor='let actor of allActors'>
+            <div>
                 <a [routerLink]="'/actors/'+actor.IdCast"><td class="title">{{actor.LastName}} {{actor.FirstName}}</td></a>
-            </tr>
-        </table>
+            </div>
+        </ng-container>
     </ng-container>
-</ng-container>
-<div *ngIf="allActors.length == 0">La liste est en cours de chargement...</div>
+    <div *ngIf="allActors.length == 0">La liste est en cours de chargement...</div>
+</div>

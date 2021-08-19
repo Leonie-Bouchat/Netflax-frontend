@@ -15,7 +15,7 @@ export class MovieComponent implements OnInit {
   private _id: number = 0;
   // public type: Type[] = []
   public img: string = "https://image.tmdb.org/t/p/w500";
-  public video: string = "";
+  public video:string;
 
 
   constructor(private _api: MoviesAPIService, private _route: ActivatedRoute) { 
@@ -25,8 +25,11 @@ export class MovieComponent implements OnInit {
     this._route.params.subscribe(p => {
       this._id = p.id;
       this._api.getOneMovie(this._id).subscribe(res =>{
-        console.log(res);
          this.movie = res
+         if(this.movie){
+          this.video = this.movie.Trailer.replace("watch?v=", "embed/");
+          console.log(this.video);
+         }
          this._api.getAllTypesByMovieId(this._id).subscribe(res => {
           if(this.movie){
             this.movie.Type = res;

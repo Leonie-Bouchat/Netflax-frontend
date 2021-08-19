@@ -20,6 +20,6 @@ export class TypesComponent implements OnInit {
   }
 
   public ShowMoviesOfThisType(id: number){
-    this._api.getOneType(id).subscribe(res => this.allMoviesOfThisType = res);
+    this._api.getAllMoviesByTypeId(id).subscribe(res => this.allMoviesOfThisType = res);
   }
 }
