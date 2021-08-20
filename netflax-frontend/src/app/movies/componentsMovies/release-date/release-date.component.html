@@ -1,10 +1,11 @@
+<button class="up" (click)="goToUp()">Haut de page</button>
 <div class="body">
     <ng-container *ngIf="allMovies.length > 0">
         <table>
             <ng-container *ngFor='let movie of allMovies'>
                     <tr>
                         <td class="year">{{movie.ReleaseDate |date:'yyyy'}}</td>
-                        <td class="title">{{movie.Title}}</td>
+                        <td class="titleMovie">{{movie.Title}}</td>
                         <td><a [routerLink]="movie.IdMovie.toString()"><button>Plus d'infos</button></a></td>
                     </tr>
             </ng-container>
@@ -12,4 +13,6 @@
     </ng-container>
     <div *ngIf="allMovies.length == 0">La liste est en cours de chargement ...</div>
 </div>
+
+
 

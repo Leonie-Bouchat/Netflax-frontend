@@ -1,8 +1,7 @@
-
 <a [routerLink]="'/actors'"><button class="back">Retour</button></a>
 <div class="body">
     <ng-container *ngIf="actor">
-        <div class="name">{{actor?.LastName}} {{actor?.FirstName}}</div>
+        <div class="name" id="up">{{actor?.LastName}} {{actor?.FirstName}}</div>
         <ng-container *ngIf='actor.Movie'>
             <ng-container *ngFor='let movie of actor.Movie'>
                 <a [routerLink]="'/movies/'+movie.IdMovie"><div>{{movie.Title}}</div></a>

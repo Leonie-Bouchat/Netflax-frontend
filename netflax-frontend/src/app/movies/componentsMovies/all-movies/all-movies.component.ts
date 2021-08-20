@@ -17,14 +17,14 @@ export class AllMoviesComponent implements OnInit {
   constructor(private _api: MoviesAPIService, private _route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this._route.params.subscribe(p => {
-      let id = p.id;
-      if(id){
-        this._api.getAllMoviesByTypeId(id).subscribe(res => {this.allMovies = res})
-      }
-      else this._api.getAllMovies().subscribe(res => this.allMovies = res);
-    });
-    
+    this._api.getAllMovies().subscribe(res => this.allMovies = res);
   }
 
+  public changeImage(image: HTMLImageElement){
+    image.src='/assets/img.jpg';
+  }
+
+  public goToUp(){
+    document.body.scrollIntoView({behavior: "smooth", block: "start", inline:"nearest"})
+  }
 }

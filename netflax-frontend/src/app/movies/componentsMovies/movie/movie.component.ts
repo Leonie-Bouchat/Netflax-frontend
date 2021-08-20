@@ -43,4 +43,7 @@ export class MovieComponent implements OnInit {
       });
     })
   }
+  public changeImage(image: HTMLImageElement){
+    image.src='/assets/img.jpg';
+  }
 }

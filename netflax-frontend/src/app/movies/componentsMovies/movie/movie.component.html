@@ -2,7 +2,7 @@
 <div class="body">
     <ng-container *ngIf="movie">
         <div class="title">{{movie.Title}}</div>
-        <img src="{{this.img+movie.Picture}}" alt="Image de {{movie.Title}} non disponible">
+        <img src="{{this.img+movie.Picture}}" alt="Image de {{movie.Title}} non disponible" (error)="changeImage(image)" #image>
         <div class="releaseDate">
             <p class="soustitle">Année de sortie :</p> 
             {{movie.ReleaseDate | date:'yyyy'}}
@@ -15,14 +15,14 @@
         <ng-container *ngIf="movie.Type.length != 0">
             <p class="soustitle">Genres :</p>
             <ng-container *ngFor="let type of movie.Type">
-                <p><a [routerLink]="'/movies/type/'+type.IdGenre" class="typeLabel"><div>{{type.Label}}</div></a></p>
+                <a [routerLink]="'/movies/type/'+type.IdGenre" class="typeLabel"><p>{{type.Label}}</p></a>
             </ng-container>
         </ng-container>
         
         <ng-container *ngIf="movie.Actor.length != 0">
             <p class="soustitle">Acteurs :</p>
             <ng-container *ngFor="let actor of movie.Actor">
-                <div>{{actor.FirstName}} {{actor.LastName}}</div>
+                <a [routerLink]="'/actors/'+actor.IdCast"><div>{{actor.LastName}} {{actor.FirstName}}</div></a>
             </ng-container>
         </ng-container>
         <ng-container ></ng-container>

@@ -1,14 +1,19 @@
-<ng-container *ngIf="allMovies.length > 0">
-    <table>
-        <ng-container *ngFor='let movie of allMovies'>
-            <tr>
-                <td><img [src]="this.img+movie.Picture" alt="Image de {{movie.Title}} non disponible" height="70" width="50"></td>
-                <td class="title">{{movie.Title}}</td>
-                <td><a [routerLink]="movie.IdMovie.toString()"><button>Plus d'infos</button></a></td>
-            </tr>
-        </ng-container>
-    </table>
-</ng-container>
-<div *ngIf="allMovies.length == 0">La liste est en cours de chargement</div>
+<button class="up" (click)="goToUp()">Haut de page</button>
+<div class="body">
+    <ng-container *ngIf="allMovies.length > 0">
+        <table>
+            <ng-container *ngFor='let movie of allMovies'>
+                <tr>
+                    <td><img [src]="this.img+movie.Picture" height="70" width="50" (error)="changeImage(image)" #image></td>
+                    <td class="titleMovie">{{movie.Title}}</td>
+                    <td><a [routerLink]="movie.IdMovie.toString()"><button>Plus d'infos</button></a></td>
+                </tr>
+            </ng-container>
+        </table>
+    </ng-container>
+    <div *ngIf="allMovies.length == 0" class="charge">La liste est en cours de chargement...</div>
+
+</div>
+
 
 

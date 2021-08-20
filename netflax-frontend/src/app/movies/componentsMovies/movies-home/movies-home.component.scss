@@ -1,5 +1,6 @@
 h1{
     text-align: center;
+    margin: 50px;
 }
 
 .button{
@@ -8,14 +9,12 @@ h1{
 }
 
 button{
-    background-color: #3a6fa0;
-    color: black;
-    cursor: pointer;
     padding: 10px 15px;
-    border-radius: 25% 10%;
     font-size: 30px;
+    margin: 10px;
 }
 
-.body{
+.bigBody{
     min-height: 75vh;
+    margin-bottom: 30px;
 }

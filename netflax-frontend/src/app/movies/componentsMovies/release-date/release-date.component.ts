@@ -17,4 +17,7 @@ export class ReleaseDateComponent implements OnInit {
     this._api.getAllMoviesByDate().subscribe(res => this.allMovies = res);
   }
 
+  public goToUp(){
+    document.body.scrollIntoView({behavior: "smooth", block: "start", inline:"nearest"})
+  }
 }

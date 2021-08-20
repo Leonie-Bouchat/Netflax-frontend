@@ -18,4 +18,8 @@ export class AllActorsComponent implements OnInit {
     this._api.getAllActors().subscribe(res => this.allActors = res)
   }
 
+  public goToUp(){
+    document.body.scrollIntoView({behavior: "smooth", block: "start", inline:"nearest"})
+  }
+
 }

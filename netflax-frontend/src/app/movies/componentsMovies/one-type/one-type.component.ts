@@ -28,4 +28,12 @@ export class OneTypeComponent implements OnInit {
       
     });
   }
+
+  public changeImage(image: HTMLImageElement){
+    image.src='/assets/img.jpg';
+  }
+
+  public goToUp(){
+    document.body.scrollIntoView({behavior: "smooth", block: "start", inline:"nearest"})
+  }
 }

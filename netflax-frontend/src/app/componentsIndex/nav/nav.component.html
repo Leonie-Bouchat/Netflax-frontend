@@ -20,7 +20,7 @@
                     <ul>
                         <li *ngFor="let child of link.children"> <!-- ngFor permet de créer de nouveau lien pour les enfants-->
                             <a *ngIf='child.url' [routerLink]="child.url">  <!-- ngIf verifie que le lien existe pour lui permettre d'être cliquable-->
-                                <div>
+                                <div class="link">
                                     {{child.title}}
                                 </div>
                             </a>

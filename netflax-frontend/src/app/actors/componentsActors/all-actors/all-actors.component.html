@@ -1,10 +1,11 @@
+<button class="up" (click)="goToUp()">Haut de page</button>
 <div class="body">
     <h1>Acteurs</h1>
     <p>Cliquez sur le nom de votre acteur favori pour voir tous les films dans lesquels il a joué !</p>
     <ng-container *ngIf="allActors.length > 0">
         <ng-container *ngFor='let actor of allActors'>
-            <div>
-                <a [routerLink]="'/actors/'+actor.IdCast"><td class="title">{{actor.LastName}} {{actor.FirstName}}</td></a>
+            <div class="actors">
+                <a [routerLink]="'/actors/'+actor.IdCast"><td class="name">{{actor.LastName}} {{actor.FirstName}}</td></a>
             </div>
         </ng-container>
     </ng-container>
